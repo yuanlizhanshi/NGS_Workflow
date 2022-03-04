@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # RNA-seq workflow
 This is a RNA-seq (illumina short reads sequencing) workflow created by Snakemake
 
