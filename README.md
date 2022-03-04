@@ -1,4 +1,5 @@
 # NGS workflow
+[toc]
 ## Bulk RNA-seq workflow
 This is a RNA-seq (illumina short reads sequencing) workflow created by Snakemake
 
@@ -37,4 +38,5 @@ The bulid method was shown:
 -c: Default use 4 cores
 
 -----
+[toc]
 ## Whole genome sequencing workflow
