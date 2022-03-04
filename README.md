@@ -1,12 +1,12 @@
 # NGS workflow
 
 ## Table of Contents
-<!-- TOC titleSize:2 tabSpaces:1 depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
+<!-- TOC titleSize:2 tabSpaces:2 depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 ## Table of Contents
 * [Table of Contents](#table-of-contents)
 * [Bulk RNA-seq workflow](#bulk-rna-seq-workflow)
- * [Setup](#setup)
- * [Usage](#usage)
+  * [Setup](#setup)
+  * [Usage](#usage)
 * [Whole genome sequencing workflow](#whole-genome-sequencing-workflow)
 <!-- /TOC -->
 
