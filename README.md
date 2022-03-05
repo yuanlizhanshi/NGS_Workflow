@@ -47,8 +47,8 @@ The bulid method was shown:
 
 **Hisat2**
 >hisat2_extract_splice_sites.py chr1.gtf > splice.txt \
->hisat2_extract_exons.py chr1.gtf > exons.txt \
->hisat2-build -p 40  chr1.fa --ss splice.txt --exon exons.txt chr1_index
+hisat2_extract_exons.py chr1.gtf > exons.txt \
+hisat2-build -p 40  chr1.fa --ss splice.txt --exon exons.txt chr1_index
 
 -----
 
