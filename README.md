@@ -5,17 +5,25 @@ This is a series of Next generation sequencing (illumina short reads sequencing)
 <!-- TOC titleSize:2 tabSpaces:2 depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 ## Table of Contents
 * [Setup](#setup)
+* [Usage](#usage)
 * [Bulk RNA-seq workflow](#bulk-rna-seq-workflow)
-  * [Usage](#usage)
 * [Whole genome sequencing workflow](#whole-genome-sequencing-workflow)
+* [Chromatin Immunoprecipitation (ChIP) sequencing workflow](#chromatin-immunoprecipitation-chip-sequencing-workflow)
 <!-- /TOC -->
 
 ## Setup
-All Requirements software was shown in environment.yaml. Your could install via:
+All workflow all have its requirements softwares which were shown in environment.yaml. You could install via:
 > conda install --file environment.yaml
+## Usage
+
+**For dry use**
+>snakemake -s snakemake.smk -np
+
+**Run workflow**
+>snakemake -s snakemake.smk -c 4
 
 ## Bulk RNA-seq workflow
-This is a RNA-seq workflow
+This is a RNA-seq workflow (from fatsq.gz to count)
 
 It provide two forms of RNA-seq workflow (mapped by STAR or Hisat2).
 
@@ -39,12 +47,7 @@ The bulid method was shown:
 >hisat2_extract_splice_sites.py chr1.gtf > splice.txt \
 >hisat2_extract_exons.py chr1.gtf > exons.txt \
 >hisat2-build -p 40  chr1.fa --ss splice.txt --exon exons.txt chr1_index
-### Usage
-**For dry use**
->snakemake -s RNA-seq.smk -np
 
-**Run workflow**
->snakemake -s RNA-seq.smk -c 4
 
 -c: Default use 4 cores
 
@@ -52,8 +55,8 @@ The bulid method was shown:
 
 ## Whole genome sequencing workflow
 
-This is a Whole genome sequencing workflow
-
+This is a Whole genome sequencing workflow (from fatsq.gz to vcf.gz)\
+**Note**: This vcf.gz needs further quality control in at further study.
 
 If you install GATK with conda, please check the version of gatk via:
 >gatk --version
@@ -64,10 +67,9 @@ https://github.com/broadinstitute/gatk/releases
 note: GTAK rely on java environment, if you don't have java, should use install java first:
 >conda instll openjdk -y
 
-Before the WGS, the genome index should be built **first**.
+Before the WGS, the genome index should be built **first** by bwa, samtools,and GATK:
+>bwa index genome.fa \
+samtools faidx genome.fa \
+gatk CreateSequenceDictionary -R genome.fa -O genome.dict
 
-**Bwa**
->bwa index genome.fa
-
-**GATK**
->gatk CreateSequenceDictionary -R genome.fa -O genome.dict
+## Chromatin Immunoprecipitation (ChIP) sequencing workflow
