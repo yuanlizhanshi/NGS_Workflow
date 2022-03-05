@@ -1,0 +1,6 @@
+snakemake
+fastp
+STAR
+samtools
+subread
+hisat2
