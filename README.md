@@ -22,6 +22,8 @@ All workflow all have its requirements softwares which were shown in environment
 **Run workflow**
 >snakemake -s snakemake.smk -c 4
 
+-c: Default use 4 cores
+
 ## Bulk RNA-seq workflow
 This is a RNA-seq workflow (from fatsq.gz to count)
 
@@ -48,9 +50,6 @@ The bulid method was shown:
 >hisat2_extract_exons.py chr1.gtf > exons.txt \
 >hisat2-build -p 40  chr1.fa --ss splice.txt --exon exons.txt chr1_index
 
-
--c: Default use 4 cores
-
 -----
 
 ## Whole genome sequencing workflow
@@ -61,10 +60,9 @@ This is a Whole genome sequencing workflow (from fatsq.gz to vcf.gz)\
 If you install GATK with conda, please check the version of gatk via:
 >gatk --version
 
-if your GATK version is **lower than 4.0**, please install gatk manually from github:
-https://github.com/broadinstitute/gatk/releases
+if your GATK version is **lower than 4.0**, please install gatk manually from github:https://github.com/broadinstitute/gatk/releases
 
-note: GTAK rely on java environment, if you don't have java, should use install java first:
+**Note**: GTAK rely on java environment, if you don't have java, should use install java first:
 >conda instll openjdk -y
 
 Before the WGS, the genome index should be built **first** by bwa, samtools,and GATK:
