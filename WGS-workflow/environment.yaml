@@ -1,6 +1,5 @@
 snakemake
 fastp
-STAR
+bwa
 samtools
-subread
-hisat2
+gatk
