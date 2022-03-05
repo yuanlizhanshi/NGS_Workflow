@@ -6,9 +6,9 @@ This is a series of Next generation sequencing (illumina short reads sequencing)
 ## Table of Contents
 * [Setup](#setup)
 * [Usage](#usage)
-* [Bulk RNA-seq workflow](#bulk-rna-seq-workflow)
-* [Whole genome sequencing workflow](#whole-genome-sequencing-workflow)
-* [Whole genome Bisulfite sequencing workflow](#whole-genome-bisulfite-sequencing-workflow)
+* [Bulk RNA Sequencing workflow](#bulk-rna-sequencing-workflow)
+* [Whole Genome Sequencing workflow](#whole-genome-sequencing-workflow)
+* [Whole Genome Bisulfite Sequencing workflow](#whole-genome-bisulfite-sequencing-workflow)
 * [Chromatin Immunoprecipitation (ChIP) sequencing workflow](#chromatin-immunoprecipitation-chip-sequencing-workflow)
 * [ATAC-seq workflow](#atac-seq-workflow)
 <!-- /TOC -->
@@ -26,7 +26,7 @@ All workflow all have its requirements softwares which were shown in environment
 
 -c: Default use 4 cores
 
-## Bulk RNA-seq workflow
+## Bulk RNA Sequencing workflow
 This is a RNA-seq workflow (from fatsq.gz to count)
 
 It provide two forms of RNA-seq workflow (mapped by STAR or Hisat2).
@@ -53,7 +53,7 @@ hisat2_extract_exons.py chr1.gtf > exons.txt \
 hisat2-build -p 40  chr1.fa --ss splice.txt --exon exons.txt chr1_index
 
 -----
-## Whole genome sequencing workflow
+## Whole Genome Sequencing workflow
 
 This is a Whole genome sequencing workflow (from fatsq.gz to vcf.gz)\
 **Note**: This vcf.gz needs further quality control in at further study.
@@ -72,7 +72,7 @@ samtools faidx genome.fa \
 gatk CreateSequenceDictionary -R genome.fa -O genome.dict
 
 -----
-## Whole genome Bisulfite sequencing workflow
+## Whole Genome Bisulfite Sequencing workflow
 
 
 -----
