@@ -8,7 +8,9 @@ This is a series of Next generation sequencing (illumina short reads sequencing)
 * [Usage](#usage)
 * [Bulk RNA-seq workflow](#bulk-rna-seq-workflow)
 * [Whole genome sequencing workflow](#whole-genome-sequencing-workflow)
+* [Whole genome Bisulfite sequencing workflow](#whole-genome-bisulfite-sequencing-workflow)
 * [Chromatin Immunoprecipitation (ChIP) sequencing workflow](#chromatin-immunoprecipitation-chip-sequencing-workflow)
+* [ATAC-seq workflow](#atac-seq-workflow)
 <!-- /TOC -->
 
 ## Setup
@@ -51,7 +53,6 @@ hisat2_extract_exons.py chr1.gtf > exons.txt \
 hisat2-build -p 40  chr1.fa --ss splice.txt --exon exons.txt chr1_index
 
 -----
-
 ## Whole genome sequencing workflow
 
 This is a Whole genome sequencing workflow (from fatsq.gz to vcf.gz)\
@@ -70,4 +71,13 @@ Before the WGS, the genome index should be built **first** by bwa, samtools,and 
 samtools faidx genome.fa \
 gatk CreateSequenceDictionary -R genome.fa -O genome.dict
 
+-----
+## Whole genome Bisulfite sequencing workflow
+
+
+-----
 ## Chromatin Immunoprecipitation (ChIP) sequencing workflow
+
+
+-----
+## ATAC-seq workflow
