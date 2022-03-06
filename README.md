@@ -73,7 +73,7 @@ gatk CreateSequenceDictionary -R genome.fa -O genome.dict
 
 -----
 ## Whole Genome Bisulfite Sequencing workflow
-
+This is a Whole genome bisulfite sequencing workflow (from fatsq.gz to bed)
 
 -----
 ## Chromatin Immunoprecipitation (ChIP) sequencing workflow
