@@ -1,11 +1,11 @@
 SAMPLES = {'qinJS_test','qinL10_test'}
-
 genome = './genome/chr1_2.fa'
 GATK = '/home/kyh/Desktop/gatk/gatk'
+
 rule all:
   input:
-    expand("raw_data/{sample}_1.fastq.gz",sample=SAMPLES),
-    expand("raw_data/{sample}_2.fastq.gz",sample=SAMPLES),
+    expand("rawdata/{sample}_1.fastq.gz",sample=SAMPLES),
+    expand("rawdata/{sample}_2.fastq.gz",sample=SAMPLES),
     expand("clean_fastq/{sample}_1.fq.gz",sample=SAMPLES),
     expand("clean_fastq/{sample}_2.fq.gz",sample=SAMPLES),
     expand("markdup_bam/{sample}_markdup.bam",sample=SAMPLES),
@@ -13,8 +13,8 @@ rule all:
     expand("vcf/all_sample.vcf.gz")
 rule QC:
   input:
-    raw_R1 = "raw_data/{sample}_1.fastq.gz",
-    raw_R2 = "raw_data/{sample}_2.fastq.gz"
+    raw_R1 = "rawdata/{sample}_1.fastq.gz",
+    raw_R2 = "rawdata/{sample}_2.fastq.gz"
   output:
     clean_R1 = "clean_fastq/{sample}_1.fq.gz",
     clean_R2 = "clean_fastq/{sample}_2.fq.gz"

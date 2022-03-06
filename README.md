@@ -42,7 +42,7 @@ The bulid method was shown:
 >STAR \
 --runMode genomeGenerate \
 --genomeDir ~/STARindex \
---runThreadN 10 \
+--runThreadN 40 \
 --genomeFastaFiles chr1.fa \
 --sjdbGTFfile chr1.gtf \
 --sjdbOverhang 149
@@ -73,7 +73,20 @@ gatk CreateSequenceDictionary -R genome.fa -O genome.dict
 
 -----
 ## Whole Genome Bisulfite Sequencing workflow
-This is a Whole genome bisulfite sequencing workflow (from fatsq.gz to bed)
+This is a Whole genome bisulfite sequencing workflow (from fatsq.gz to bed and other downsteam formats)\
+There are **two** types of workflow: map by bwa or by bismark, you can choose one of the workflow.
+
+
+For **bwa-meth**:
+bwa-meth is available at https://github.com/brentp/bwa-meth, please insatall it and its dependencies first\
+The index should bulid:
+>bwameth.py index genome.fa
+
+The final output file has two forms: methylKit formats and cytosine_report. The detail format of output file description were in https://github.com/dpryan79/MethylDackel
+
+For **bismark**:
+
+
 
 -----
 ## Chromatin Immunoprecipitation (ChIP) sequencing workflow

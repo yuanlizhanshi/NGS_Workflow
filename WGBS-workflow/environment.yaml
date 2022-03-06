@@ -1,0 +1,5 @@
+snakemake
+bgzip
+fastp
+samtools
+MethylDackel
