@@ -27,7 +27,7 @@ All workflow all have its requirements softwares which were shown in environment
 -c: Default use 4 cores
 
 ## Bulk RNA Sequencing workflow
-This is a RNA-seq workflow (from fatsq.gz to count)
+This is a RNA-seq workflow (from fastq.gz to count)
 
 It provide two forms of RNA-seq workflow (mapped by STAR or Hisat2).
 
