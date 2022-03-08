@@ -3,3 +3,5 @@ fastp
 bwa
 samtools
 gatk
+bismark
+bowtie2

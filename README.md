@@ -11,11 +11,13 @@ This is a series of Next generation sequencing (illumina short reads sequencing)
 * [Whole Genome Bisulfite Sequencing workflow](#whole-genome-bisulfite-sequencing-workflow)
 * [Chromatin Immunoprecipitation (ChIP) sequencing workflow](#chromatin-immunoprecipitation-chip-sequencing-workflow)
 * [ATAC-seq workflow](#atac-seq-workflow)
+* [Single cell workflow](#single-cell-workflow)
 <!-- /TOC -->
 
 ## Setup
 All workflow all have its requirements softwares which were shown in environment.yaml. You could install via:
 > conda install --file environment.yaml
+
 ## Usage
 
 **For dry use**
@@ -55,7 +57,7 @@ hisat2-build -p 40  chr1.fa --ss splice.txt --exon exons.txt chr1_index
 -----
 ## Whole Genome Sequencing workflow
 
-This is a Whole genome sequencing workflow (from fatsq.gz to vcf.gz)\
+This is a Whole genome sequencing workflow (from fastq.gz to vcf.gz)\
 **Note**: This vcf.gz needs further quality control in at further study.
 
 If you install GATK with conda, please check the version of gatk via:
@@ -73,20 +75,22 @@ gatk CreateSequenceDictionary -R genome.fa -O genome.dict
 
 -----
 ## Whole Genome Bisulfite Sequencing workflow
-This is a Whole genome bisulfite sequencing workflow (from fatsq.gz to bed and other downsteam formats)\
+This is a Whole genome bisulfite sequencing workflow (from fastq.gz to bed and other downsteam formats)\
 There are **two** types of workflow: map by bwa or by bismark, you can choose one of the workflow.
 
 
-For **bwa-meth**:
+For **bwa-meth**:\
 bwa-meth is available at https://github.com/brentp/bwa-meth, please insatall it and its dependencies first\
-The index should bulid:
+Then bulid index:
 >bwameth.py index genome.fa
 
-The final output file has two forms: methylKit formats and cytosine_report. The detail format of output file description were in https://github.com/dpryan79/MethylDackel
+The final output file has two formats: methylKit and cytosine_report. The detailed description of the output file format were in https://github.com/dpryan79/MethylDackel
 
-For **bismark**:
+For **bismark**:\
+bismark is available at conda and https://github.com/FelixKrueger/Bismark, Genome index also need to build first:
+>bismark_genome_preparation ./genome/
 
-
+Before running this snakemake, there are many parameters that need to change in the snakemake file, such as the aligner, the mismatch number, and whether the strand specific library, you should read the document of bismark carefully.
 
 -----
 ## Chromatin Immunoprecipitation (ChIP) sequencing workflow
@@ -94,3 +98,9 @@ For **bismark**:
 
 -----
 ## ATAC-seq workflow
+
+-----
+## Single cell workflow
+This is workflow is used for upsteam analysis of Single cell RNA-seq and Single cell ATAC-seq.
+Only support the **10X genomics** sequencing platform.\
+Before the analyse, you should download **Cell Ranger** form the website of [10X genomics](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger).
