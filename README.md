@@ -11,7 +11,7 @@ This is a series of Next generation sequencing (illumina short reads sequencing)
 * [Whole Genome Bisulfite Sequencing workflow](#whole-genome-bisulfite-sequencing-workflow)
 * [Chromatin Immunoprecipitation (ChIP) sequencing workflow](#chromatin-immunoprecipitation-chip-sequencing-workflow)
 * [ATAC-seq workflow](#atac-seq-workflow)
-* [Single cell workflow](#single-cell-workflow)
+* [Single cell multi-omics workflow](#single-cell-multi-omics-workflow)
 <!-- /TOC -->
 
 ## Setup
@@ -100,7 +100,7 @@ Before running this snakemake, there are many parameters that need to change in 
 ## ATAC-seq workflow
 
 -----
-## Single cell workflow
+## Single cell multi-omics workflow
 This is workflow is used for upsteam analysis of Single cell RNA-seq and Single cell ATAC-seq.
-Only support the **10X genomics** sequencing platform.\
+Currently only support the **10X genomics** sequencing platform.\
 Before the analyse, you should download **Cell Ranger** form the website of [10X genomics](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger).
