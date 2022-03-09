@@ -54,6 +54,10 @@ The bulid method was shown:
 hisat2_extract_exons.py chr1.gtf > exons.txt \
 hisat2-build -p 40  chr1.fa --ss splice.txt --exon exons.txt chr1_index
 
+If you don't have a high-quality reference genome for your species or want to identify more transcripts such as long non-coding RNA, using stringtie after mapping is suggested.
+
+
+
 -----
 ## Whole Genome Sequencing workflow
 
@@ -75,7 +79,7 @@ gatk CreateSequenceDictionary -R genome.fa -O genome.dict
 
 -----
 ## Whole Genome Bisulfite Sequencing workflow
-This is a Whole genome bisulfite sequencing workflow (from fastq.gz to bed and other downsteam formats)\
+This is a Whole genome bisulfite sequencing workflow (from fastq.gz to bed and other downsteam formats).\
 There are **two** types of workflow: map by bwa or by bismark, you can choose one of the workflow.
 
 
@@ -90,11 +94,17 @@ For **bismark**:\
 bismark is available at conda and https://github.com/FelixKrueger/Bismark, Genome index also need to build first:
 >bismark_genome_preparation ./genome/
 
-Before running this snakemake, there are many parameters that need to change in the snakemake file, such as the aligner, the mismatch number, and whether the strand specific library, you should read the document of bismark carefully.
+Before running this snakemake, there are many parameters that need to change in the snakemake file, such as the aligner, the mismatch number, and whether the strand specific library, etc. you should read the document of bismark carefully.
 
 -----
 ## Chromatin Immunoprecipitation (ChIP) sequencing workflow
 
+This is a ChIP-seq workflow (from fastq.gz to peak).
+Before the ChIP-seq workflow, the genome index of bowtie2 should be built **first**.
+
+>bowtie2-build genome.fa  genome
+
+There are also many parameters need change in snakemake file. Its depends on your ChIP experiment reseach object (Transcription factors or Histone modification), reseach species (Genome size) and Replication numbers. you should read the paper of [MACS2](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2008-9-9-r137) carefully.
 
 -----
 ## ATAC-seq workflow

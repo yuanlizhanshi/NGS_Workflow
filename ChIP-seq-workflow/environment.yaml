@@ -1,0 +1,5 @@
+snakemake
+fastp
+bowtie2
+samtools
+macs2
