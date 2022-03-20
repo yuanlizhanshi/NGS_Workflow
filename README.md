@@ -111,6 +111,7 @@ There are also many parameters need change in snakemake file. Its depends on you
 This is a ATAC-seq workflow (from fastq.gz to peak).
 
 The workflow of ATAC-seq is similar to the ChIP-seq, so the genome index was the same, the only difference is Peak calling (ATAC **without** input sample).
+This workflow also appropriated for other open chromatin sequencing method such as Dnase-Seq, MNase-Seq, and FAIRE-Seq, just might need to change the parameters of MACS2.
 
 After Peak calling, To get all peak info and for downsteam analyse, you should run:
 >Rscript Get_diff_peak.R
