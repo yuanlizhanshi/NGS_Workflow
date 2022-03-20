@@ -108,6 +108,13 @@ There are also many parameters need change in snakemake file. Its depends on you
 
 -----
 ## ATAC-seq workflow
+This is a ATAC-seq workflow (from fastq.gz to peak).
+
+The workflow of ATAC-seq is similar to the ChIP-seq, so the genome index was the same, the only difference is Peak calling (ATAC **without** input sample).
+
+After Peak calling, To get all peak info and for downsteam analyse, you should run:
+>Rscript Get_diff_peak.R
+
 
 -----
 ## Single cell multi-omics workflow
