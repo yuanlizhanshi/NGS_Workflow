@@ -116,7 +116,7 @@ The workflow of the ATAC-seq is similar to the ChIP-seq, so the genome index was
 This workflow is also appropriate for other open chromatin sequencing methods such as Dnase-Seq, MNase-Seq, and FAIRE-Seq, just might need to change the parameters of MACS2.
 
 After Peak calling, To get all peak info and for downsteam analyse, you should run:
->Rscript Get_diff_peak.R
+>Rscript Get_all_peak.R
 
 -----
 ## m6a-seq workflow
