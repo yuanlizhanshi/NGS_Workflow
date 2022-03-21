@@ -11,6 +11,7 @@ This is a series of Next generation sequencing (illumina short reads sequencing)
 * [Whole Genome Bisulfite Sequencing workflow](#whole-genome-bisulfite-sequencing-workflow)
 * [Chromatin Immunoprecipitation (ChIP) sequencing workflow](#chromatin-immunoprecipitation-chip-sequencing-workflow)
 * [ATAC-seq workflow](#atac-seq-workflow)
+* [m6a-seq workflow](#m6a-seq-workflow)
 * [Single cell multi-omics workflow](#single-cell-multi-omics-workflow)
 <!-- /TOC -->
 
@@ -117,9 +118,38 @@ This workflow is also appropriate for other open chromatin sequencing methods su
 After Peak calling, To get all peak info and for downsteam analyse, you should run:
 >Rscript Get_diff_peak.R
 
+-----
+## m6a-seq workflow
+
+
+
 
 -----
 ## Single cell multi-omics workflow
 This is workflow is used for upsteam analysis of Single cell RNA-seq and Single cell ATAC-seq.
 Currently only support the **10X genomics** sequencing platform.\
-Before the analyse, you should download **Cell Ranger** form the website of [10X genomics](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger).
+Before the analyse, you should download **Cell Ranger** form the website of [10X genomics](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger).Cell Ranger was an integrated software for Single cell RNA-seq and Single-cell ATAT-seq.
+If your used public data, you should **rename** you fastq following the naming rules of cellranger.\
+Then index your genomne:
+>cellranger mkref \
+--genome genome \
+--fasta genome.fa \
+--genes genome_annotation.gtf \
+--nthreads=40
+
+For scRNA-seq:
+>cellranger count \
+--id sample_ID \
+--sample sample_ID \
+--localcores 40 \
+--no-bam \
+--nosecondary \
+--fastqs fastq_folder/ \
+--transcriptome genome_index
+
+For scATAC-seq:
+>cellranger-atac count \
+--id=sample_name \
+--reference=genome_index \
+--fastqs=fastq_folder/ \
+--localcores=40
