@@ -118,8 +118,13 @@ This workflow is also appropriate for other open chromatin sequencing methods su
 After Peak calling, To get all peak info and for downsteam analyse, you should run:
 >Rscript Get_all_peak.R
 
+The differential peaks could calculated with [DEseq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) or [edgeR](https://bioconductor.org/packages/release/bioc/html/edgeR.html). (The identification of differential peaks is still controversial and you should read the literature carefully).\
+[HINT](http://www.regulatory-genomics.org/hint/introduction/) was recommended to find the TF footprints
+
+
 -----
-## m6a-seq workflow
+## RNA Chromatin Immunoprecipitation (RIP) sequencing workflow
+This is a RIP-seq workflow (from fastq.gz to peak), which is also suit for m6a-seq(meRIP)
 
 
 
