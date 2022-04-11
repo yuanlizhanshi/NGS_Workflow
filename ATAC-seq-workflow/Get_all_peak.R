@@ -1,8 +1,8 @@
 library(tidyverse)
 library(GenomicRanges)
 generate_gtf <- function(peak_info) {
-  starts <- peak_info$start + round(peak_info$length/2)-251
-  ends = peak_info$start + round(peak_info$length/2)+249
+  starts <- peak_info$start + round(peak_info$length/2  - 251 )
+  ends <-  peak_info$start + round(peak_info$length/2 + 249 )
   if (any(starts< 0)) {
     starts[which(starts< 0)] <- 1
     ends[which(starts< 0)] <- 501
@@ -12,7 +12,7 @@ generate_gtf <- function(peak_info) {
     start =  starts,
     end = ends
   )
-  test <- as.data.frame(reduce(makeGRangesFromDataFrame(test)))
+  test <- as.data.frame(GenomicRanges::reduce(makeGRangesFromDataFrame(test)))
   test2 <- data.frame(
     chr = test$seqnames,
     source = rep('.',nrow(test)),
