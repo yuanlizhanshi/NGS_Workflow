@@ -42,6 +42,7 @@ The bulid method was shown:
 
 **STAR**:
 
+
 >STAR \
 --runMode genomeGenerate \
 --genomeDir ~/STARindex \
