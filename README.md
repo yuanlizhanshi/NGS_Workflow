@@ -11,7 +11,7 @@ This is a series of Next generation sequencing (illumina short reads sequencing)
 * [Whole Genome Bisulfite Sequencing workflow](#whole-genome-bisulfite-sequencing-workflow)
 * [Chromatin Immunoprecipitation (ChIP) sequencing workflow](#chromatin-immunoprecipitation-chip-sequencing-workflow)
 * [ATAC-seq workflow](#atac-seq-workflow)
-* [m6a-seq workflow](#m6a-seq-workflow)
+* [RNA Chromatin Immunoprecipitation (RIP) sequencing workflow](#rna-chromatin-immunoprecipitation-rip-sequencing-workflow)
 * [Single cell multi-omics workflow](#single-cell-multi-omics-workflow)
 <!-- /TOC -->
 
@@ -126,8 +126,8 @@ The differential peaks could calculated with [DEseq2](https://bioconductor.org/p
 ## RNA Chromatin Immunoprecipitation (RIP) sequencing workflow
 This is a RIP-seq workflow (from fastq.gz to peak), which is also suit for m6a-seq(meRIP)
 
-
-
+The mapping method was consistent with RNA-seq and the Call peak method was consistent with to ChIP-seq. \
+For identification of differential peaks, [exomePeak2](https://bioconductor.org/packages/release/bioc/html/exomePeak2.html) was recommended.
 
 -----
 ## Single cell multi-omics workflow
