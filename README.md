@@ -124,7 +124,7 @@ The differential peaks could calculated with [DEseq2](https://bioconductor.org/p
 
 
 -----
-## RNA Chromatin Immunoprecipitation (RIP) sequencing workflow
+## RNA Immunoprecipitation (RIP) sequencing workflow
 This is a RIP-seq workflow (from fastq.gz to peak), which is also suit for m6a-seq(meRIP)
 
 The mapping method was consistent with RNA-seq and the Call peak method was consistent with to ChIP-seq. \
