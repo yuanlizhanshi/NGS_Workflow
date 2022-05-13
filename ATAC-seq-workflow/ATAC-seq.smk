@@ -25,7 +25,7 @@ rule QC:
     "clean_fastq/{sample}_qc_log.txt"
   shell:
     "fastp -w {threads} -i {input.raw_R1} -o {output.clean_R1} "
-    "-I {input.raw_R2} -O {output.clean_R2} 2>{log}"
+    "-I {input.raw_R2} -O {output.clean_R2} --detect_adapter_for_pe 2>{log}"
 
     
 rule Bowtie2_map:

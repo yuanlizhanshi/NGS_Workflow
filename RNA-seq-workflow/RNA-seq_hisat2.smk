@@ -21,7 +21,7 @@ rule QC:
   threads: 4
   shell:
     "fastp -w {threads} -i {input.raw_R1} -o {output.clean_R1} "
-    "-I {input.raw_R2} -O {output.clean_R2}"
+    "-I {input.raw_R2} -O {output.clean_R2} --detect_adapter_for_pe"
 
 rule hisat2_map:
   input:
@@ -29,9 +29,11 @@ rule hisat2_map:
     clean_R2 = "clean_fastq/{sample}_2.fq.gz"
   output:
     'sam/{sample}.sam'
+  log:
+    "sam/{sample}_mapping_log.txt"
   threads: 4
   shell:
-    "hisat2 -p {threads} -x {index} -1 {input.clean_R1} -2 {input.clean_R2} -S {output}"
+    "hisat2 -p {threads} -x {index} -1 {input.clean_R1} -2 {input.clean_R2} -S {output} 2>{log}"
 
 rule samtools_sort:
   input:
