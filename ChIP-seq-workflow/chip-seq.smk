@@ -66,14 +66,14 @@ rule bam_index:
 
 rule bam_to_bigwig:
   input:
-    'rmdup_bam/{sample}_{type}_rmdup.bam'
+    bam = 'rmdup_bam/{sample}_{type}_rmdup.bam',
+    bam_index = 'rmdup_bam/{sample}_{type}_rmdup.bam..bai'
   output:
     'rmdup_bam/{sample}_{type}_rmdup.bigwig'
   log:
     'bigwig/{sample}_{type}.bigwig.log'
   shell:
     'bamCoverage -bs 50 -b {input} -o {output} --normalizeUsing CPM 2>{log}'
-
 
 rule Macs2_Peak_calling:
   input:
