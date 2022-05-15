@@ -55,6 +55,26 @@ rule samtools_remove_duplication:
   shell:
     'samtools rmdup {input} {output.bam}'
 
+rule bam_index:
+  input:
+    'rmdup_bam/{sample}_{type}_rmdup.bam'
+  output:
+    'rmdup_bam/{sample}_{type}_rmdup.bam..bai'
+  shell:
+    "samtools index {input}"
+
+
+rule bam_to_bigwig:
+  input:
+    'rmdup_bam/{sample}_{type}_rmdup.bam'
+  output:
+    'rmdup_bam/{sample}_{type}_rmdup.bigwig'
+  log:
+    'bigwig/{sample}_{type}.bigwig.log'
+  shell:
+    'bamCoverage -bs 50 -b {input} -o {output} --normalizeUsing CPM 2>{log}'
+
+
 rule Macs2_Peak_calling:
   input:
     IP_sample = "rmdup_bam/{sample}_IP_rmdup.bam",
@@ -68,3 +88,4 @@ rule Macs2_Peak_calling:
     output_dir = "./peak/{sample}/"
   shell:
     "macs2 callpeak -t {input.IP_sample} -c {input.input_sample} -f BAMPE -g 4.5e8 -n {params.output_prefix} -B -q 0.001 --outdir {params.output_dir}"
+
