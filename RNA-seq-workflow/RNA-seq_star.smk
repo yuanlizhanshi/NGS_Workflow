@@ -22,7 +22,7 @@ rule QC:
     "clean_fastq/{sample}" 
   shell:
     "fastp -w {threads} -i {input.raw_R1} -o {output.clean_R1} "
-    "-I {input.raw_R2} -O {output.clean_R2} --detect_adapter_for_pe --html {log}"
+    "-I {input.raw_R2} -O {output.clean_R2} --detect_adapter_for_pe --html --html {log}"
     
 rule STAR_map:
   input:
