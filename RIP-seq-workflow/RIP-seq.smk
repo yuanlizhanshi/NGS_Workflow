@@ -22,9 +22,11 @@ rule QC:
     clean_R1 = "clean_fastq/{sample}_{type}_1.fq.gz",
     clean_R2 = "clean_fastq/{sample}_{type}_2.fq.gz"
   threads: 4
+  log:
+    "clean_fastq/{sample}" 
   shell:
     "fastp -w {threads} -i {input.raw_R1} -o {output.clean_R1} "
-    "-I {input.raw_R2} -O {output.clean_R2} --detect_adapter_for_pe"
+    "-I {input.raw_R2} -O {output.clean_R2} --detect_adapter_for_pe --html --html {log}"
 
 rule hisat2_map:
   input:
@@ -33,8 +35,10 @@ rule hisat2_map:
   output:
     'sam/{sample}_{type}.sam'
   threads: 4
+  log:
+    "sam/{sample}_mapping_log.txt"
   shell:
-    "hisat2 -p {threads} -x {index} -1 {input.clean_R1} -2 {input.clean_R2} -S {output}"
+    "hisat2 -p {threads} -k 1 -x {index} -1 {input.clean_R1} -2 {input.clean_R2} -S {output} 2>{log}"
 
 rule samtools_sort:
   input:
@@ -65,4 +69,4 @@ rule Macs2_Peak_calling:
     output_prefix = "{sample}",
     output_dir = "./peak/{sample}/"
   shell:
-    "macs2 callpeak -t {input.IP_sample} -c {input.input_sample} -f BAMPE -g 4.5e8 -n {params.output_prefix} -B -q 0.001 --outdir {params.output_dir}"
+    "macs2 callpeak -t {input.IP_sample} -c {input.input_sample} -f BAMPE -g 1.4e8 --nomodel -n {params.output_prefix} -B -q 0.001 --outdir {params.output_dir}"
