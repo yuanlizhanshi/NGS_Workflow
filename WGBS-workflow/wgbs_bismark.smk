@@ -20,9 +20,11 @@ rule QC:
     clean_R1 = "clean_fastq/{sample}_1.fq.gz",
     clean_R2 = "clean_fastq/{sample}_2.fq.gz"
   threads: 4
+  log:
+    "clean_fastq/{sample}.html"
   shell:
     "fastp -w {threads} -i {input.raw_R1} -o {output.clean_R1} "
-    "-I {input.raw_R2} -O {output.clean_R2} --detect_adapter_for_pe"
+    "-I {input.raw_R2} -O {output.clean_R2} --detect_adapter_for_pe --html {log}"
 
 rule Bismark_map:
   input:

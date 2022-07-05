@@ -19,7 +19,7 @@ rule QC:
     clean_R1 = "clean_fastq/{sample}_1.fq.gz",
     clean_R2 = "clean_fastq/{sample}_2.fq.gz"
   log:
-    "clean_fastq/{sample}"
+    "clean_fastq/{sample}.html"
   threads: 4
   shell:
     "fastp -w {threads} -i {input.raw_R1} -o {output.clean_R1} "

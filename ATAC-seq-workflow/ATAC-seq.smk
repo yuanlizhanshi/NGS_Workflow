@@ -22,10 +22,10 @@ rule QC:
     clean_R2 = "clean_fastq/{sample}_2.fq.gz"
   threads: 4
   log:
-    "clean_fastq/{sample}_qc_log.txt"
+    "clean_fastq/{sample}.html"
   shell:
     "fastp -w {threads} -i {input.raw_R1} -o {output.clean_R1} "
-    "-I {input.raw_R2} -O {output.clean_R2} --detect_adapter_for_pe 2>{log}"
+    "-I {input.raw_R2} -O {output.clean_R2} --detect_adapter_for_pe --html --html {log} "
 
     
 rule Bowtie2_map:

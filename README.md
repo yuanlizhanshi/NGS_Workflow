@@ -116,8 +116,9 @@ The workflow of the ATAC-seq is similar to the ChIP-seq, so the genome index was
 
 This workflow is also appropriate for other open chromatin sequencing methods such as Dnase-Seq, MNase-Seq, and FAIRE-Seq, just might need to change the parameters of MACS2.
 
-After Peak calling, To get all peak info and for downsteam analyse, you should run:
->Rscript Get_all_peak.R
+After Peak calling, To get all peaks information and for downsteam analyse, you should run:
+
+For multi sample, it is recommended to merge peaks with iterative Overlap Peak Merging Procedure, which was first introduced in this [paper](https://science.sciencemag.org/content/362/6413/eaav1898) and code is available at [ArchR](https://github.com/GreenleafLab/ArchR).
 
 The differential peaks could calculated with [DEseq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) or [edgeR](https://bioconductor.org/packages/release/bioc/html/edgeR.html). (The identification of differential peaks is still controversial and you should read the literature carefully,such as [DiffBind](http://www.bioconductor.org/packages/release/bioc/html/DiffBind.html)).\
 [HINT](http://www.regulatory-genomics.org/hint/introduction/) was recommended to find the TF footprints
