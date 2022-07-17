@@ -106,7 +106,13 @@ Before the ChIP-seq workflow, the genome index of bowtie2 should be built **firs
 
 >bowtie2-build genome.fa  genome
 
-There are also many parameters need change in snakemake file. Its depends on your ChIP experiment reseach object (Transcription factors or Histone modification), reseach species (Genome size) and Replication numbers. you should read the paper of [MACS2](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2008-9-9-r137) carefully.
+There are also many parameters need change in snakemake file. Its depends on your ChIP experiment reseach object (Transcription factors or Histone modification), reseach species (Genome size) and replication numbers. you should read the paper of [MACS2](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2008-9-9-r137) carefully.
+
+[Deeptools](https://github.com/deeptools/deepTools) was recommended to generate the meta-plot and heatmap on a reference point or certain genomic regions.
+
+[HOMER](http://homer.salk.edu/homer/ngs/peakMotifs.html) and [MEME suite](http://meme.ebi.edu.au/meme/index.html) was recommended to TF Motif enrichment and analysis.
+
+[ChromHMM](http://compbio.mit.edu/ChromHMM/) was was recommended to peroform chromatin state segmentation.
 
 -----
 ## ATAC-seq workflow
@@ -118,7 +124,7 @@ This workflow is also appropriate for other open chromatin sequencing methods su
 
 After Peak calling, To get all peaks information and for downsteam analyse, you should run:
 
-For multi sample, it is recommended to merge peaks with iterative Overlap Peak Merging Procedure, which was first introduced in this [paper](https://science.sciencemag.org/content/362/6413/eaav1898), the code was modified from [ArchR](https://github.com/GreenleafLab/ArchR).
+For multi sample, it is recommended to merge peaks with iterative Overlap Peak Merging Procedure, which was first introduced in [Corces & Granja et. al. Science 2018](https://science.sciencemag.org/content/362/6413/eaav1898) and recommonded in [Grandi et al. Nat Protoc 2022](https://www.nature.com/articles/s41596-022-00692-9), the code was modified from [ArchR](https://github.com/GreenleafLab/ArchR).
 
 The differential peaks could calculated with [DEseq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) or [edgeR](https://bioconductor.org/packages/release/bioc/html/edgeR.html). (The identification of differential peaks is still controversial and you should read the literature carefully,such as [DiffBind](http://www.bioconductor.org/packages/release/bioc/html/DiffBind.html)).\
 [HINT](http://www.regulatory-genomics.org/hint/introduction/) was recommended to find the TF footprints
@@ -160,3 +166,5 @@ For scATAC-seq:
 --reference=genome_index \
 --fastqs=fastq_folder/ \
 --localcores=40
+
+[Seurat](https://satijalab.org/seurat/index.html), [monocell](https://cole-trapnell-lab.github.io/monocle3/), and [ArchR](https://www.archrproject.com/) was recommended to perform downstream analysis of singlecell multi-omics data. 
