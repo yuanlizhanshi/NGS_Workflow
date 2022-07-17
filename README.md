@@ -101,7 +101,7 @@ Before running this snakemake, there are many parameters that need to change in 
 -----
 ## Chromatin Immunoprecipitation (ChIP) sequencing workflow
 
-This is a ChIP-seq workflow (from fastq.gz to peak).
+This is a ChIP-seq workflow (from fastq.gz to peak). It was also suitable for [CUT&RUN](https://elifesciences.org/articles/46314) and [CUT&Tag](https://www.nature.com/articles/s41596-020-0373-x) experiments.
 Before the ChIP-seq workflow, the genome index of bowtie2 should be built **first**.
 
 >bowtie2-build genome.fa  genome
