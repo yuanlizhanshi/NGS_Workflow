@@ -118,7 +118,7 @@ There are also many parameters need change in snakemake file. Its depends on you
 ## ATAC-seq workflow
 This is a ATAC-seq workflow (from fastq.gz to peak).
 
-The workflow of the ATAC-seq is similar to the ChIP-seq, so the genome index was the same, the only difference is Peak calling (ATAC **without** input sample).
+The workflow of the ATAC-seq is similar to the ChIP-seq, so the genome index was the same, the only difference is Peak calling (ATAC-seq **without** input sample).
 
 This workflow is also appropriate for other open chromatin sequencing methods such as Dnase-Seq, MNase-Seq, and FAIRE-Seq, just might need to change the parameters of MACS2.
 
