@@ -35,7 +35,7 @@ rule hisat2_map:
     "sam/{sample}_mapping_log.txt"
   threads: 4
   shell:
-    "hisat2 -p {threads} -x {index} -1 {input.clean_R1} -2 {input.clean_R2} -S {output} 2>{log}"
+    "hisat2 -p {threads} -x {index} --dta -1 {input.clean_R1} -2 {input.clean_R2} -S {output} 2>{log}"
 
 rule samtools_sort:
   input:
