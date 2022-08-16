@@ -39,7 +39,7 @@ rule hisat2_map:
 
 rule samtools_sort:
   input:
-    'sam/{sample}.sam'
+    temp('sam/{sample}.sam')
   output:
     'sortedbam/{sample}.bam'
   threads: 4

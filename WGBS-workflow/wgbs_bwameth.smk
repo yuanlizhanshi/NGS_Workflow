@@ -32,7 +32,7 @@ rule Bwameth_map:
     clean_R1 = "clean_fastq/{sample}_1.fq.gz",
     clean_R2 = "clean_fastq/{sample}_2.fq.gz"
   output:
-    "sam/{sample}.sam"
+    temp("sam/{sample}.sam")
   threads: 4
   shell:
     "bwameth.py --reference {genome} {input.clean_R1} {input.clean_R2} -t {threads} > {output}"

@@ -33,7 +33,7 @@ rule hisat2_map:
     clean_R1 = "clean_fastq/{sample}_{type}_1.fq.gz",
     clean_R2 = "clean_fastq/{sample}_{type}_2.fq.gz"
   output:
-    'sam/{sample}_{type}.sam'
+    temp('sam/{sample}_{type}.sam')
   threads: 4
   log:
     "sam/{sample}_mapping_log.txt"
