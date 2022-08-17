@@ -73,7 +73,7 @@ rule Combine_gvcf:
   input:
     gvcf = expand("gvcf/{sample}.g.vcf.gz",sample=SAMPLES)
   output:
-    "vcf/all_sample.gvcf.gz"
+    temp("vcf/all_sample.gvcf.gz")
   params:
     extra = lambda wildcards, input: ' -V '.join(input.gvcf)
   shell:
@@ -81,8 +81,27 @@ rule Combine_gvcf:
 
 rule Genotype_gvcf:
   input:
-    "vcf/all_sample.gvcf.gz"
+    "gvcf/all_sample.gvcf.gz"
   output:
     "vcf/all_sample.vcf.gz"
   shell:
-    "{GATK} GenotypeGVCFs -R {genome} -V {input} -O {output}"
+    '{GATK} --java-options "-Xmx100G" GenotypeGVCFs -R {genome} -V {input} -O {output}'
+
+
+rule Extract_SNP:
+  input:
+    "vcf/all_sample.vcf.gz"
+  output:
+    "vcf/all_sample_snp.vcf.gz"
+  shell:
+    '{GATK} --java-options "-Xmx100G" SelectVariants -R {genome} '
+    '-V {input} -O {output} --select-type-to-include SNP'
+    
+rule Extract_indel:
+  input:
+    "vcf/all_sample.vcf.gz"
+  output:
+    "vcf/all_sample_indel.vcf.gz"
+  shell:
+    '{GATK} --java-options "-Xmx100G" SelectVariants -R {genome} '
+    '-V {input} -O {output} --select-type-to-include INDEL'
