@@ -1,11 +1,11 @@
-SAMPLES = {'qinJS_test','qinL10_test'}
-genome = './genome/chr1_2.fa'
-GATK = '/home/kyh/Desktop/gatk/gatk'
+SAMPLES = {'JS','L10','big','small'}
+genome = './genome/silkworm.fa'
+GATK = '/home/kyh/software/gatk/gatk'
 
 rule all:
   input:
-    expand("rawdata/{sample}_1.fastq.gz",sample=SAMPLES),
-    expand("rawdata/{sample}_2.fastq.gz",sample=SAMPLES),
+    expand("rawdata/{sample}_1.fq.gz",sample=SAMPLES),
+    expand("rawdata/{sample}_2.fq.gz",sample=SAMPLES),
     expand("clean_fastq/{sample}_1.fq.gz",sample=SAMPLES),
     expand("clean_fastq/{sample}_2.fq.gz",sample=SAMPLES),
     expand("markdup_bam/{sample}_markdup.bam",sample=SAMPLES),
@@ -13,8 +13,8 @@ rule all:
     expand("vcf/all_sample.vcf.gz")
 rule QC:
   input:
-    raw_R1 = "rawdata/{sample}_1.fastq.gz",
-    raw_R2 = "rawdata/{sample}_2.fastq.gz"
+    raw_R1 = "rawdata/{sample}_1.fq.gz",
+    raw_R2 = "rawdata/{sample}_2.fq.gz"
   output:
     clean_R1 = "clean_fastq/{sample}_1.fq.gz",
     clean_R2 = "clean_fastq/{sample}_2.fq.gz"
@@ -39,7 +39,7 @@ rule samtools_sort:
   input:
     'sam/{sample}.sam'
   output:
-    'sortedbam/{sample}.bam'
+     temp('sortedbam/{sample}.bam')
   threads: 4
   shell:
     'samtools sort -@ {threads} -o {output} {input}'
@@ -63,17 +63,20 @@ rule samtools_index:
 
 rule Variant_calling:
   input:
-    'markdup_bam/{sample}_markdup.bam'
+    bam = 'markdup_bam/{sample}_markdup.bam',
+    bam_index  = 'markdup_bam/{sample}_markdup.bam.bai'
   output:
-    'gvcf/{sample}.g.vcf.gz',
+    gvcf = 'gvcf/{sample}.g.vcf.gz',
+    bam = 'gvcf/{sample}_religned.bam'
   shell:
-    '{GATK} HaplotypeCaller -R {genome} --emit-ref-confidence GVCF -I {input} -O {output}'
+    '{GATK} --java-options "-Xmx100G -XX:ParallelGCThreads=4" HaplotypeCaller -R {genome} '
+    '--emit-ref-confidence GVCF -I {input.bam} -O {output.gvcf} -bamout {output.bam}'
 
 rule Combine_gvcf:
   input:
     gvcf = expand("gvcf/{sample}.g.vcf.gz",sample=SAMPLES)
   output:
-    temp("vcf/all_sample.gvcf.gz")
+    temp("gvcf/all_sample.gvcf.gz")
   params:
     extra = lambda wildcards, input: ' -V '.join(input.gvcf)
   shell:
