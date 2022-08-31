@@ -1,0 +1,8 @@
+Building DAG of jobs...
+MissingInputException in line 17 of /mnt/c/Users/kongmou/Documents/GitHub/NGS_Workflow/ChIP-seq-workflow/test_data/chip-seq.smk:
+Missing input files for rule QC:
+    output: clean_fastq/test1_input_1.fq.gz, clean_fastq/test1_input_2.fq.gz
+    wildcards: sample=test1, type=input
+    affected files:
+        rawdata/test1_input_1.fastq.gz
+        rawdata/test1_input_2.fastq.gz

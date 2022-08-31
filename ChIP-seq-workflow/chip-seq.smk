@@ -5,8 +5,8 @@ Bowtie2_index = "genome/chr1_2"
 
 rule all:
   input:
-    expand("rawdata/{sample}_{type}_1.fastq.gz",sample=SAMPLES,type = TYPES),
-    expand("rawdata/{sample}_{type}_1.fastq.gz",sample=SAMPLES,type = TYPES),
+    expand("rawdata/{sample}_{type}_1.fq.gz",sample=SAMPLES,type = TYPES),
+    expand("rawdata/{sample}_{type}_1.fq.gz",sample=SAMPLES,type = TYPES),
     expand("clean_fastq/{sample}_{type}_1.fq.gz",sample=SAMPLES,type = TYPES),
     expand("clean_fastq/{sample}_{type}_2.fq.gz",sample=SAMPLES,type = TYPES),
     expand("rmdup_bam/{sample}_{type}_rmdup.bam",sample=SAMPLES,type = TYPES),
@@ -16,14 +16,14 @@ rule all:
 
 rule QC:
   input:
-    raw_R1 = "rawdata/{sample}_{type}_1.fastq.gz",
-    raw_R2 = "rawdata/{sample}_{type}_2.fastq.gz"
+    raw_R1 = "rawdata/{sample}_{type}_1.fq.gz",
+    raw_R2 = "rawdata/{sample}_{type}_2.fq.gz"
   output:
     clean_R1 = "clean_fastq/{sample}_{type}_1.fq.gz",
     clean_R2 = "clean_fastq/{sample}_{type}_2.fq.gz"
   threads: 4
   log:
-    "clean_fastq/{sample}.html" 
+    "clean_fastq/{sample}_{type}.html" 
   shell:
     "fastp -w {threads} -i {input.raw_R1} -o {output.clean_R1} "
     "-I {input.raw_R2} -O {output.clean_R2} --detect_adapter_for_pe --html {log}"
@@ -40,11 +40,21 @@ rule Bowtie2_map:
   shell:
     "bowtie2 -p {threads} --local -N 1 --maxins 1000 --1 {input.clean_R1} -2 {input.clean_R2} -x {Bowtie2_index} -S {output} 2>{log}"
 
+rule samtools_view:
+  input:
+    "sam/{sample}_{type}.sam"
+  output:
+    temp('sam/{sample}_{type}.bam')
+  threads: 20
+  shell:
+    'samtools view -f 0x2 -q 10 -bh -o {output} {input}'
+
+
 rule samtools_sort:
   input:
-    'sam/{sample}_{type}.sam'
+    'sam/{sample}_{type}.bam'
   output:
-    'sortedbam/{sample}_{type}.bam'
+    temp('sortedbam/{sample}_{type}.bam')
   threads: 4
   shell:
     'samtools sort -@ {threads} -o {output} {input}'
