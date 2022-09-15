@@ -51,6 +51,8 @@ The bulid method was shown:
 --sjdbGTFfile chr1.gtf \
 --sjdbOverhang 149
 
+If your reads length is much shorter than 150 bp, your should change **--sjdbOverhang** to reads length - 1
+
 **Hisat2**
 >hisat2_extract_splice_sites.py chr1.gtf > splice.txt \
 hisat2_extract_exons.py chr1.gtf > exons.txt \
@@ -64,7 +66,7 @@ If you don't have a high-quality reference genome for your species or want to id
 ## Whole Genome Sequencing workflow
 
 This is a Whole genome sequencing workflow (from fastq.gz to vcf.gz)\
-**Note**: This vcf.gz needs further quality control in at further study.
+**Note**: This vcf.gz needs further quality control in further study.
 
 If you install GATK with conda, please check the version of gatk via:
 >gatk --version
@@ -110,7 +112,7 @@ There are also many parameters need change in snakemake file. Its depends on you
 
 [Deeptools](https://github.com/deeptools/deepTools) was recommended to generate the meta-plot and heatmap on a reference point or certain genomic regions.
 
-[HOMER](http://homer.salk.edu/homer/ngs/peakMotifs.html) and [MEME suite](http://meme.ebi.edu.au/meme/index.html) was recommended to TF Motif enrichment and analysis.
+[HOMER](http://homer.salk.edu/homer/ngs/peakMotifs.html) and [MEME suite](http://meme.ebi.edu.au/meme/index.html) were recommended to perform peak annotaion and TF Motif enrichment and analysis.
 
 [ChromHMM](http://compbio.mit.edu/ChromHMM/) was was recommended to peroform chromatin state segmentation.
 
