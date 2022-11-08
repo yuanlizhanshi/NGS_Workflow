@@ -56,7 +56,27 @@ rule samtools_remove_duplication:
     bam = 'rmdup_bam/{sample}_rmdup.bam',
   shell:
     'samtools rmdup {input} {output.bam}'
-    
+
+rule bam_index:
+  input:
+    'rmdup_bam/{sample}_rmdup.bam'
+  output:
+    'rmdup_bam/{sample}_rmdup.bam.bai'
+  shell:
+    "samtools index {input}"
+
+rule bam_to_bigwig:
+  input:
+    bam = 'rmdup_bam/{sample}_rmdup.bam',
+    bam_index = 'rmdup_bam/{sample}_rmdup.bam.bai'
+  output:
+    'bigwig/{sample}.bigwig'
+  threads: 20
+  log:
+    'bigwig/{sample}.bigwig.log'
+  shell:
+    'bamCoverage -bs 20 -p {threads} -b {input.bam} -o {output} --normalizeUsing CPM 2>{log}'
+       
 rule Macs2_Peak_calling:
   input:
     "rmdup_bam/{sample}_rmdup.bam"
