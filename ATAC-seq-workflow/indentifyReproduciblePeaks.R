@@ -11,8 +11,9 @@ generate_gtf <- function(test_res){
     score = rep('.',nrow(test_res)),
     strand = rep('.',nrow(test_res)),
     frame = rep('.',nrow(test_res)),
-    attribute = rep('gene_id',nrow(test_res)),
-    name =  paste0(rep('Peak',nrow(test_res)),1:nrow(test_res))
+    name = paste0('gene_id "',
+                  paste0(rep('Peak',nrow(test_res)),1:nrow(test_res)),
+                  '"')
   )
   return(test2)
 }
