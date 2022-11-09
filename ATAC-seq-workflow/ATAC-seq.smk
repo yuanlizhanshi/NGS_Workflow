@@ -38,7 +38,7 @@ rule Bowtie2_map:
   log:
     "sam/{sample}_mapping_log.txt"
   shell:
-    "bowtie2 -p {threads} --local -N 1 -X 2000 -1 {input.clean_R1} -2 {input.clean_R2} -x {Bowtie2_index} -S {output} 2>{log}"
+    "bowtie2 -p {threads} -N 1 -X 2000 -1 {input.clean_R1} -2 {input.clean_R2} -x {Bowtie2_index} -S {output} 2>{log}"
 
 rule samtools_sort:
   input:
