@@ -10,6 +10,10 @@ for line in fai:
   chr.append(line[0])
 fai.close()
 
+#wildcard_constraints:
+#    samples = "[A-Z0-9]",
+#    chr= ".{11}"
+    
 rule all:
   input:
     expand("/home/kyh/Desktop/a42/silkdb3.0/rawdata/{sample}_1.fq.gz",sample=samples),
