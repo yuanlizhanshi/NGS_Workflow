@@ -79,7 +79,7 @@ rule Variant_calling_by_chromosomes:
         gvcf = temp('temp_gvcf/{sample}.{chromosome}.gvcf')
     shell:
         """
-        {GATK} --java-options "-Xmx100G -XX:ParallelGCThreads=4" HaplotypeCaller -R {genome} --emit-ref-confidence GVCF -I {input} -O {output.gvcf} -bamout {output.bam}
+        {GATK} --java-options "-Xmx100G -XX:ParallelGCThreads=4" HaplotypeCaller -R {genome} --emit-ref-confidence GVCF -I {input} -O {output.gvcf} -bamout {output.bam} -L {wildcards.chr}
         """
 rule merge_bam_by_chromosomes:
     input:
