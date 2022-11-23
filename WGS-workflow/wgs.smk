@@ -77,13 +77,14 @@ rule samtools_index:
     
 rule Variant_calling_by_chromosomes:
     input:
-        'markdup_bam/{sample}_markdup.bam'
+        bam = 'markdup_bam/{sample}_markdup.bam'
+        bai = 'markdup_bam/{sample}_markdup.bam.bai'
     output:
         bam = temp('temp_bam/{sample}.{chromosome}.bam'),
         gvcf = temp('temp_gvcf/{sample}.{chromosome}.gvcf')
     shell:
         """
-        {GATK} --java-options "-Xmx100G -XX:ParallelGCThreads=4" HaplotypeCaller -R {genome} --emit-ref-confidence GVCF -I {input} -O {output.gvcf} -bamout {output.bam} -L {wildcards.chr}
+        {GATK} --java-options "-Xmx100G -XX:ParallelGCThreads=4" HaplotypeCaller -R {genome} --emit-ref-confidence GVCF -I {input.bam} -O {output.gvcf} -bamout {output.bam} -L {wildcards.chr}
         """
 rule merge_bam_by_chromosomes:
     input:
