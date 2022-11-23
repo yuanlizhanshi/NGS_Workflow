@@ -77,7 +77,7 @@ rule samtools_index:
     
 rule Variant_calling_by_chromosomes:
     input:
-        bam = 'markdup_bam/{sample}_markdup.bam'
+        bam = 'markdup_bam/{sample}_markdup.bam',
         bai = 'markdup_bam/{sample}_markdup.bam.bai'
     output:
         bam = temp('temp_bam/{sample}.{chromosome}.bam'),
