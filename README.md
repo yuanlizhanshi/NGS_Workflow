@@ -114,7 +114,7 @@ There are also many parameters need change in snakemake file. Its depends on you
 
 [HOMER](http://homer.salk.edu/homer/ngs/peakMotifs.html) and [MEME suite](http://meme.ebi.edu.au/meme/index.html) were recommended to perform peak annotaion and TF Motif enrichment and analysis.
 
-[ChromHMM](http://compbio.mit.edu/ChromHMM/) was was recommended to peroform chromatin state segmentation.
+[ChromHMM](http://compbio.mit.edu/ChromHMM/) was recommended to peroform chromatin state segmentation.
 
 -----
 ## ATAC-seq workflow
