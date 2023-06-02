@@ -152,6 +152,11 @@ Then index your genomne:
 --genes genome_annotation.gtf \
 --nthreads=40
 
+
+>cellranger-arc mkref \
+--config=hg38_cellranger_arc.config 
+--nthreads=75
+
 For scRNA-seq:
 >cellranger count \
 --id sample_ID \
