@@ -162,7 +162,6 @@ For scRNA-seq:
 --id sample_ID \
 --sample sample_ID \
 --localcores 40 \
---no-bam \
 --nosecondary \
 --fastqs fastq_folder/ \
 --transcriptome genome_index
