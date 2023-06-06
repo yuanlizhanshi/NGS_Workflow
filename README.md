@@ -143,9 +143,9 @@ For identification of differential peaks, [exomePeak2](https://bioconductor.org/
 ## Single cell multi-omics workflow
 This is workflow is used for upsteam analysis of Single cell RNA-seq and Single cell ATAC-seq.
 Currently only support the **10X genomics** sequencing platform.\
-Before the analyse, you should download **Cell Ranger** form the website of [10X genomics](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger).Cell Ranger was an integrated software for Single cell RNA-seq and Single-cell ATAT-seq.
+Before the analyse, you should download **Cell Ranger** form the website of [10X genomics](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger).Cell Ranger was an integrated software for Single cell RNA-seq, Single cell ATAC-seq and 10X multiome.
 If your used public data, you should **rename** you fastq following the naming rules of cellranger.\
-Then index your genomne:
+Then index your genome:
 >cellranger mkref \
 --genome genome \
 --fasta genome.fa \
@@ -156,6 +156,8 @@ Then index your genomne:
 >cellranger-arc mkref \
 --config=hg38_cellranger_arc.config 
 --nthreads=75
+
+The index of cellranger-arc is also suitable for scATAC-seq
 
 For scRNA-seq:
 >cellranger count \
