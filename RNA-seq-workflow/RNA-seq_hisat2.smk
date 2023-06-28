@@ -30,7 +30,7 @@ rule hisat2_map:
     clean_R1 = "clean_fastq/{sample}_1.fq.gz",
     clean_R2 = "clean_fastq/{sample}_2.fq.gz"
   output:
-    'sam/{sample}.sam'
+    temp('sam/{sample}.sam')
   log:
     "sam/{sample}_mapping_log.txt"
   threads: 4
@@ -39,7 +39,7 @@ rule hisat2_map:
 
 rule samtools_sort:
   input:
-    temp('sam/{sample}.sam')
+    'sam/{sample}.sam'
   output:
     'sortedbam/{sample}.bam'
   threads: 4
