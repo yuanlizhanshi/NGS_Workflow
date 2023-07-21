@@ -79,7 +79,7 @@ rule bam_index:
 rule bam_to_bigwig:
   input:
     bam = 'rmdup_bam/{sample}_{type}_rmdup.bam',
-    bam_index = 'rmdup_bam/{sample}_{type}_rmdup.bam..bai'
+    bam_index = 'rmdup_bam/{sample}_{type}_rmdup.bam.bai'
   output:
     'rmdup_bam/{sample}_{type}_rmdup.bigwig'
   log:
