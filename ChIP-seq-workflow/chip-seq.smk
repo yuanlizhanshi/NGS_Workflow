@@ -10,9 +10,10 @@ rule all:
     expand("clean_fastq/{sample}_{type}_1.fq.gz",sample=SAMPLES,type = TYPES),
     expand("clean_fastq/{sample}_{type}_2.fq.gz",sample=SAMPLES,type = TYPES),
     expand("rmdup_bam/{sample}_{type}_rmdup.bam",sample=SAMPLES,type = TYPES),
+    expand("rmdup_bam/{sample}_{type}_rmdup.bam",sample=SAMPLES,type = TYPES),
     expand("peak/{sample}/{sample}_peaks.narrowPeak",sample=SAMPLES),
     expand("peak/{sample}/{sample}_peaks.xls",sample=SAMPLES),
-    expand("peak/{sample}/{sample}_summits.bed",sample=SAMPLES)
+    expand("bigwig/{sample}_{type}_rmdup.bigwig",sample=SAMPLES,type = TYPES)
 
 rule QC:
   input:
@@ -71,7 +72,7 @@ rule bam_index:
   input:
     'rmdup_bam/{sample}_{type}_rmdup.bam'
   output:
-    'rmdup_bam/{sample}_{type}_rmdup.bam..bai'
+    'rmdup_bam/{sample}_{type}_rmdup.bam.bai'
   shell:
     "samtools index {input}"
 
@@ -81,11 +82,11 @@ rule bam_to_bigwig:
     bam = 'rmdup_bam/{sample}_{type}_rmdup.bam',
     bam_index = 'rmdup_bam/{sample}_{type}_rmdup.bam.bai'
   output:
-    'rmdup_bam/{sample}_{type}_rmdup.bigwig'
+    'bigwig/{sample}_{type}_rmdup.bigwig'
   log:
     'bigwig/{sample}_{type}.bigwig.log'
   shell:
-    'bamCoverage -bs 50 -b {input} -o {output} --normalizeUsing CPM 2>{log}'
+    'bamCoverage -bs 50 -b {input.bam} -o {output} --normalizeUsing CPM 2>{log}'
 
 rule Macs2_Peak_calling:
   input:
