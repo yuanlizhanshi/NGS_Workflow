@@ -55,3 +55,14 @@ rule counts:
   threads: 4
   shell:
     "featureCounts -a {input.gtf} -o {output} -T {threads} {input.bam}"
+
+#For paired reads
+#rule counts:
+#   input:
+#     gtf = {gtf},
+#     bam = expand('sortedbam/{sample}.bam',sample=SAMPLES)
+#   output:
+#     "counts.txt"
+#   threads: 4
+#   shell:
+#     "featureCounts -p --countReadPairs -a {input.gtf} -o {output} -T {threads} {input.bam}"
