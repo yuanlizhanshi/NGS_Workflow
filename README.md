@@ -135,6 +135,23 @@ The differential peaks could calculated with [DEseq2](https://bioconductor.org/p
 
 
 -----
+## HiC workflow
+
+This a HiC workflow (from fastq to hic file)
+
+In HiC data, i use bwa to align reads to reference genome, the genome index is the same in whole genome sequence.
+
+Then we need to generate the enzyme cutting site from genome.
+
+>python digest_genome.py -r dpnii -o hg38_digest.bed hg38.fa \
+>awk -F '\t' '{print $1, $2, $3}' hg38_digest.bed > hg38_digest2.bed
+
+The type of enzyme is depend on the HiC experiment, the built in enzyme is mboi: ["^GATC"], dpnii: ["^GATC"], bglii: ["A^GATCT"],hindiii: ["A^AGCTT"], arima: ["G^ANTC"]
+
+The downsteam analysis could preformed by [Juicer](https://github.com/aidenlab/juicer)
+
+
+-----
 ## RNA Immunoprecipitation (RIP) sequencing workflow
 This is a RIP-seq workflow (from fastq.gz to peak), which is also suit for m6a-seq(meRIP)
 
