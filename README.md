@@ -1,18 +1,22 @@
-# NGS workflow
+
+<span style="font-size: 30px;"><b>NGS workflow</b></span>
+
+
 This is a series of Next generation sequencing (illumina short reads sequencing) workflow created by Snakemake
 
 
 <!-- TOC titleSize:2 tabSpaces:2 depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
-## Table of Contents
-* [Setup](#setup)
-* [Usage](#usage)
-* [Bulk RNA Sequencing workflow](#bulk-rna-sequencing-workflow)
-* [Whole Genome Sequencing workflow](#whole-genome-sequencing-workflow)
-* [Whole Genome Bisulfite Sequencing workflow](#whole-genome-bisulfite-sequencing-workflow)
-* [Chromatin Immunoprecipitation (ChIP) sequencing workflow](#chromatin-immunoprecipitation-chip-sequencing-workflow)
-* [ATAC-seq workflow](#atac-seq-workflow)
-* [RNA Chromatin Immunoprecipitation (RIP) sequencing workflow](#rna-chromatin-immunoprecipitation-rip-sequencing-workflow)
-* [Single cell multi-omics workflow](#single-cell-multi-omics-workflow)
+<span style="font-size: 30px;"><b>Table of Contents</b></span> 
+- [Setup](#setup)
+- [Usage](#usage)
+- [Bulk RNA Sequencing workflow](#bulk-rna-sequencing-workflow)
+- [Whole Genome Sequencing workflow](#whole-genome-sequencing-workflow)
+- [Whole Genome Bisulfite Sequencing workflow](#whole-genome-bisulfite-sequencing-workflow)
+- [Chromatin Immunoprecipitation (ChIP) sequencing workflow](#chromatin-immunoprecipitation-chip-sequencing-workflow)
+- [ATAC-seq workflow](#atac-seq-workflow)
+- [HiC workflow](#hic-workflow)
+- [RNA Immunoprecipitation (RIP) sequencing workflow](#rna-immunoprecipitation-rip-sequencing-workflow)
+- [Single cell multi-omics workflow](#single-cell-multi-omics-workflow)
 <!-- /TOC -->
 
 ## Setup
