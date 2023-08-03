@@ -149,11 +149,11 @@ Then we need to generate the enzyme cutting site from genome.
 >python digest_genome.py -r dpnii -o hg38_digest.bed hg38.fa \
 >awk -F '\t' '{print $1, $2, $3}' hg38_digest.bed > hg38_digest2.bed
 
-The type of enzyme is depend on the HiC experiment, the built in enzyme is mboi: ["^GATC"], dpnii: ["^GATC"], bglii: ["A^GATCT"],hindiii: ["A^AGCTT"], arima: ["G^ANTC"]
+The type of enzyme is depend on the HiC experiment, the built in enzyme is mboi: ["^GATC"], dpnii: ["^GATC"], bglii: ["A^GATCT"],hindiii: ["A^AGCTT"], arima: ["G^ANTC"].
 
-Most scripts were modified form [renlab](https://github.com/ren-lab/hic-pipeline/tree/master/bin)
+Most scripts were modified form [renlab](https://github.com/ren-lab/hic-pipeline/tree/master/bin).
 
-The downsteam analysis could preformed by [Juicer](https://github.com/aidenlab/juicer)
+The downsteam analysis could preformed by [Juicer](https://github.com/aidenlab/juicer).
 
 
 -----
