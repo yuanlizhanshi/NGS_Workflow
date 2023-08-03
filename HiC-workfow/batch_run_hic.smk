@@ -4,7 +4,6 @@ import os
 samples = ['test']
 
 genome_index = '/home/kyh/Desktop/hg38/hg38_bwa/hg38'
-
 digest_bed = '/data/kyh/islet_regulatome/HiC/hg38_digest2.bed'
 
 rule all:
