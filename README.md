@@ -164,6 +164,14 @@ The mapping method was consistent with RNA-seq and the Call peak method was cons
 For identification of differential peaks, [exomePeak2](https://bioconductor.org/packages/release/bioc/html/exomePeak2.html) was recommended.
 
 -----
+
+## Ribo sequencing workflow
+
+TBD
+
+-----
+
+
 ## Single cell multi-omics workflow
 This is workflow is used for upsteam analysis of Single cell RNA-seq and Single cell ATAC-seq.
 Currently only support the **10X genomics** sequencing platform.\
