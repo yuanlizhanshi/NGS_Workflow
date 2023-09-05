@@ -15,7 +15,6 @@ rule all:
     expand("library/{sample}.sh",sample=library_files),
     expand('{sample}/outs/summary.csv',sample=library_files)
 
-
 rule cellranger:
   input:
     'library/{sample}.sh'
