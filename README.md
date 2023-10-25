@@ -16,6 +16,7 @@ This is a series of Next generation sequencing (illumina short reads sequencing)
 - [ATAC-seq workflow](#atac-seq-workflow)
 - [HiC workflow](#hic-workflow)
 - [RNA Immunoprecipitation (RIP) sequencing workflow](#rna-immunoprecipitation-rip-sequencing-workflow)
+- [Ribo sequencing workflow](#ribo-sequencing-workflow)
 - [Single cell multi-omics workflow](#single-cell-multi-omics-workflow)
 <!-- /TOC -->
 
@@ -111,7 +112,7 @@ Before the ChIP-seq workflow, the genome index of bowtie2 should be built **firs
 
 >bowtie2-build genome.fa  genome
 
-There are also many parameters need change in snakemake file. Its depends on your ChIP experiment reseach object (Transcription factors or Histone modification), reseach species (Genome size) and replication numbers. you should read the paper of [MACS2](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2008-9-9-r137) carefully.
+There are also many parameters need change in snakemake file. Its depends on your ChIP experiment research object (Transcription factors or Histone modification), research species (Genome size) and replication numbers. you should read the paper of [MACS2](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2008-9-9-r137) carefully.
 
 [Deeptools](https://github.com/deeptools/deepTools) was recommended to generate the meta-plot and heatmap on a reference point or certain genomic regions.
 
