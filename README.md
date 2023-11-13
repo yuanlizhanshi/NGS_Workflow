@@ -215,6 +215,8 @@ For multiome:
                        --localcores=40 \
                        --localmem=256
 
+For other types of single cell data, follow the tutorials of [STARsolo](https://github.com/alexdobin/STAR/blob/master/docs/STARsolo.md) and [sinto](https://timoast.github.io/sinto/scatac.html)
+
 If you famililar with R, [Seurat](https://satijalab.org/seurat/index.html), [monocle](https://cole-trapnell-lab.github.io/monocle3/), and [ArchR](https://www.archrproject.com/) framework were recommended to perform downstream analysis of singlecell multi-omics data. 
 
 If you famililar with python, [Scanpy](https://scanpy.readthedocs.io/en/stable/), [scVI](https://docs.scvi-tools.org/en/stable/index.html), and [SnapATAC2](https://kzhang.org/SnapATAC2/) framework were recommended to perform downstream analysis of singlecell multi-omics data. 
