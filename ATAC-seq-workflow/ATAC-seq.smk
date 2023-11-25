@@ -1,6 +1,8 @@
 SAMPLES = {"test1","test2"}
+
 genome = 'genome/chr1_2.fa'
 Bowtie2_index = "genome/chr1_2"
+gtf = 'genome.gtf'
 
 rule all:
   input:
@@ -11,7 +13,9 @@ rule all:
     expand("rmdup_bam/{sample}_rmdup.bam",sample=SAMPLES),
     expand("peak/{sample}/{sample}_peaks.narrowPeak",sample=SAMPLES),
     expand("peak/{sample}/{sample}_peaks.xls",sample=SAMPLES),
-    expand("peak/{sample}/{sample}_summits.bed",sample=SAMPLES)
+    expand("peak/{sample}/{sample}_summits.bed",sample=SAMPLES),
+    expand("peak/{sample}/{sample}_peaks_finalhits.txt",sample=SAMPLES)
+    
 
 rule QC:
   input:
@@ -90,3 +94,12 @@ rule Macs2_Peak_calling:
   shell:
     "macs2 callpeak -t {input} --keep-dup all -f BAMPE --nomodel --shift -75 --extsize 150 -g 4.5e8 -n {params.output_prefix} -B -q 0.001 --outdir {params.output_dir}"
 
+rule peak_annotation:
+    input:
+        "peak/{sample}/{sample}_peaks.narrowPeak"
+    output:
+        "peak/{sample}/{sample}_peaks_finalhits.txt",
+    params:
+        output_dir = "./peak/{sample}/"
+    shell:
+        "uropa --bed {input} --gtf {gtf} --show_attributes gene_id gene_name --feature_anchor start --distance 3000 3000 --feature gene -o {params.output_dir}"
