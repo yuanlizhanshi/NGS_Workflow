@@ -3,7 +3,7 @@ samples = {'JS','L10','big','small'}
 genome = './genome/silkworm.fa'
 GATK = '/home/kyh/software/gatk/gatk'
 
-fai = open('/home/kyh/Desktop/refindex/silkworm.fa.fai','r')
+fai = open('/home/kyh/Desktop/refindex/hg38.fa.fai','r')
 chr = []
 for line in fai:
   line = line.split('\t')
