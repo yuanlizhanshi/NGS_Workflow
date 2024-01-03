@@ -80,8 +80,8 @@ rule Variant_calling_by_chromosomes:
         bam = 'markdup_bam/{sample}_markdup.bam',
         bai = 'markdup_bam/{sample}_markdup.bam.bai'
     output:
-        bam = temp('temp_bam/{sample}.{chromosome}.bam'),
-        gvcf = temp('temp_gvcf/{sample}.{chromosome}.gvcf')
+        bam = temp('temp_bam/{sample}.{chr}.bam'),
+        gvcf = temp('temp_gvcf/{sample}.{chr}.gvcf')
     shell:
         """
         {GATK} --java-options "-Xmx100G -XX:ParallelGCThreads=4" HaplotypeCaller -R {genome} --emit-ref-confidence GVCF -I {input.bam} -O {output.gvcf} -bamout {output.bam} -L {wildcards.chr}
