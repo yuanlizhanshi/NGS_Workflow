@@ -1,6 +1,6 @@
-samples = {'JS','L10','big','small'}
+samples = ['P1','P2','P3','P4']
 
-genome = './genome/silkworm.fa'
+genome = '/home/kyh/Desktop/refindex/hg38.fa'
 GATK = '/home/kyh/software/gatk/gatk'
 
 fai = open('/home/kyh/Desktop/refindex/hg38.fa.fai','r')
@@ -16,10 +16,10 @@ fai.close()
     
 rule all:
   input:
-    expand("/home/kyh/Desktop/a42/silkdb3.0/rawdata/{sample}_1.fq.gz",sample=samples),
-    expand("/home/kyh/Desktop/a42/silkdb3.0/rawdata/{sample}_2.fq.gz",sample=samples),
-    expand("/home/kyh/Desktop/a42/silkdb3.0/clean_fastq/{sample}_1.fq.gz",sample=samples),
-    expand("/home/kyh/Desktop/a42/silkdb3.0/clean_fastq/{sample}_2.fq.gz",sample=samples),
+    expand("/home/kyh/Desktop/rawdata/{sample}_1.fq.gz",sample=samples),
+    expand("/home/kyh/Desktop/rawdata/{sample}_2.fq.gz",sample=samples),
+    expand("/home/kyh/Desktop/clean_fastq/{sample}_1.fq.gz",sample=samples),
+    expand("/home/kyh/Desktop/clean_fastq/{sample}_2.fq.gz",sample=samples),
     expand("markdup_bam/{sample}_markdup.bam",sample=samples),
     expand("markdup_bam/{sample}_markdup.bam.bai",sample=samples),
     expand('last_bam/{sample}_last.bam',sample= samples),
@@ -27,21 +27,21 @@ rule all:
     expand("vcf/all_sample.vcf.gz")
 rule QC:
   input:
-    raw_R1 = "/home/kyh/Desktop/a42/silkdb3.0/rawdata/{sample}_1.fq.gz",
-    raw_R2 = "/home/kyh/Desktop/a42/silkdb3.0/rawdata/{sample}_2.fq.gz"
+    raw_R1 = "/home/kyh/Desktop/rawdata/{sample}_1.fq.gz",
+    raw_R2 = "/home/kyh/Desktop/rawdata/{sample}_2.fq.gz"
   output:
-    clean_R1 = "/home/kyh/Desktop/a42/silkdb3.0/clean_fastq/{sample}_1.fq.gz",
-    clean_R2 = "/home/kyh/Desktop/a42/silkdb3.0/clean_fastq/{sample}_2.fq.gz"
+    clean_R1 = "/home/kyh/Desktop/clean_fastq/{sample}_1.fq.gz",
+    clean_R2 = "/home/kyh/Desktop/clean_fastq/{sample}_2.fq.gz"
   threads: 16
   log:
-    "/home/kyh/Desktop/a42/silkdb3.0/clean_fastq/{sample}.html"   
+    "/home/kyh/Desktop/clean_fastq/{sample}.html"   
   shell:
     "fastp -w {threads} -i {input.raw_R1} -o {output.clean_R1} "
     "-I {input.raw_R2} -O {output.clean_R2} --detect_adapter_for_pe --html {log}"
 rule Bwa_map:
   input:
-    clean_R1 = "/home/kyh/Desktop/a42/silkdb3.0/clean_fastq/{sample}_1.fq.gz",
-    clean_R2 = "/home/kyh/Desktop/a42/silkdb3.0/clean_fastq/{sample}_2.fq.gz"
+    clean_R1 = "/home/kyh/Desktop/clean_fastq/{sample}_1.fq.gz",
+    clean_R2 = "/home/kyh/Desktop/clean_fastq/{sample}_2.fq.gz"
   output:
     temp("sam/{sample}.sam")
   threads: 20
