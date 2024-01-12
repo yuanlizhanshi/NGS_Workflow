@@ -14,7 +14,7 @@ hg38 = "~/Desktop/hg38/hg38_bowtie2/hg38.fa"
 Bowtie2_index = "~/Desktop/hg38/hg38_bowtie2/hg38"
 gtf = '~/Desktop/hg38/hg38_transcript/genes.gtf'
 genome_black_list = "/data/kyh/NB4_GRN/basic_GRN/NB4_ABC/reference/hg38_blacklist.bed"
-
+r_path = "~/miniconda3/envs/r43/bin/Rscript"
 # my_dict = {}
 # def get_mapping_rate(file):
 #     with open(file,'r') as f:
@@ -37,6 +37,7 @@ rule all:
         expand("clean_fastq/{sample}_2.fq.gz",sample=SAMPLES),
         expand("rmdup_bam/{sample}_rmdup.bam",sample=SAMPLES),
         expand("rmdup_bam/{sample}_rmdup.bam.bai",sample=SAMPLES),
+        expand("fragment_distuibution/{sample}_rmdup.pdf",sample=SAMPLES),
         expand("peak/{sample}/{sample}_peaks.narrowPeak",sample=SAMPLES),
         expand("peak/{sample}/{sample}_peaks.xls",sample=SAMPLES),
         expand("peak/{sample}/{sample}_summits.bed",sample=SAMPLES),
@@ -95,7 +96,16 @@ rule bam_index:
         'rmdup_bam/{sample}_rmdup.bam.bai'
     shell:
         "samtools index {input}"
-       
+
+rule bam_qc:
+    input:
+        'rmdup_bam/{sample}_rmdup.bam'
+    output:
+        'fragment_distuibution/{sample}_rmdup.pdf'
+    shell:
+        "{r_path} atac_qc.R --bam {input}"
+        
+  
 rule Macs2_Peak_calling:
     input:
         "rmdup_bam/{sample}_rmdup.bam"
