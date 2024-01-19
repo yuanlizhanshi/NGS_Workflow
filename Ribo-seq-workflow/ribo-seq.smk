@@ -89,4 +89,4 @@ rule bam_to_bigwig:
     log:
         'bigwig/{sample}.bigwig.log'
     shell:
-        'bamCoverage -bs 50 -b {input.bam} -o {output} --normalizeUsing CPM 2>{log}'
+        'bamCoverage -bs 1 -b {input.bam} -o {output} --normalizeUsing CPM 2>{log}'
