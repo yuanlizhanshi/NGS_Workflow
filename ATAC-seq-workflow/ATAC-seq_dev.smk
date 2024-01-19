@@ -99,7 +99,7 @@ rule bam_index:
 
 rule bam_qc:
     input:
-         bam = 'rmdup_bam/{sample}_rmdup.bam'
+         bam = 'rmdup_bam/{sample}_rmdup.bam',
          index = 'rmdup_bam/{sample}_rmdup.bam.bai'
     output:
         'fragment_distuibution/{sample}_rmdup.pdf'
