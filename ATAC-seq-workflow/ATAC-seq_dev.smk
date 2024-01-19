@@ -99,11 +99,12 @@ rule bam_index:
 
 rule bam_qc:
     input:
-        'rmdup_bam/{sample}_rmdup.bam'
+         bam = 'rmdup_bam/{sample}_rmdup.bam'
+         index = 'rmdup_bam/{sample}_rmdup.bam.bai'
     output:
         'fragment_distuibution/{sample}_rmdup.pdf'
     shell:
-        "{r_path} atac_qc.R --bam {input}"
+        "{r_path} {QC_script_path} --bam {input.bam}"
         
   
 rule Macs2_Peak_calling:
