@@ -11,7 +11,9 @@ option_list <- list(
 args <- parse_args(OptionParser(option_list=option_list))
 bam_file =  args$bam
 bamFiles.labels <- tools::file_path_sans_ext(basename(bam_file))
-
+if (!dir.exists('fragment_distuibution')) {
+    dir.create('fragment_distuibution')
+}
 out_pdf_name <- paste0('./fragment_distuibution/',bamFiles.labels,'.pdf')
 pdf(out_pdf_name,width = 8,height = 6)
 fragSize <- fragSizeDist(bamFile = bam_file,bamFiles.labels =  bamFiles.labels)
