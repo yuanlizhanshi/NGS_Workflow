@@ -99,13 +99,8 @@ rule bam_index:
 
 rule bam_qc:
     input:
-<<<<<<< HEAD
         bam = 'rmdup_bam/{sample}_rmdup.bam'
         index = 'rmdup_bam/{sample}_rmdup.bam.bai'
-=======
-         bam = 'rmdup_bam/{sample}_rmdup.bam',
-         index = 'rmdup_bam/{sample}_rmdup.bam.bai'
->>>>>>> a240b3eea1bcd397150a96f66c6c68c3f544c1f1
     output:
         'fragment_distuibution/{sample}_rmdup.pdf'
     shell:
