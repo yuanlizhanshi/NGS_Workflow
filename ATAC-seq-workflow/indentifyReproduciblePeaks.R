@@ -134,4 +134,4 @@ all_ReproduciblePeaks <- indentifyReproduciblePeaks(summitFiles = test_Peak,summ
 all_ReproduciblePeaks_gtf <- generate_gtf(all_ReproduciblePeaks)
 write.table(all_ReproduciblePeaks_gtf,file = 'all_ReproduciblePeaks.gtf',sep = "\t",col.names = F,row.names = F,quote = F)
 
-#featureCounts -p -a all_ReproduciblePeaks.gtf -t exon -g gene_id -M -O -o all_peak_count.txt -T 20 ../rmdup_bam/
+#featureCounts -p countReadPairs -a all_ReproduciblePeaks.gtf -t exon -g gene_id -M -O -o all_peak_count.txt -T 20 ../rmdup_bam/
