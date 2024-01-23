@@ -11,20 +11,20 @@ for file_path in glob.glob(os.path.join(directory_path, pattern)):
 
 
 rule all:
-  input:
-    expand("library/{sample}.sh",sample=library_files),
-    expand('{sample}/outs/summary.csv',sample=library_files)
+	input:
+		expand("library/{sample}.sh",sample=library_files),
+		expand('{sample}/outs/summary.csv',sample=library_files)
 
 rule cellranger:
-  input:
-    'library/{sample}.sh'
-  threads: 10
-  output:
-    '{sample}/outs/summary.csv'
-  shell:
-    """
-    rm -rf {wildcards.sample}
-    bash {input}
-    """
+	input:
+		'library/{sample}.sh'
+	threads: 10
+	output:
+		'{sample}/outs/summary.csv'
+	shell:
+		"""
+		rm -rf {wildcards.sample}
+		bash {input}
+		"""
 
     

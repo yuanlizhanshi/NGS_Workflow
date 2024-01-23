@@ -1,24 +1,41 @@
-import glob
-import os
+from pathlib import Path
 import re
+import pandas as pd
 
-directory_path = "clean_fastq"
-trRNA_index = '/mnt/g/ribo_test/index/mm_trRNA_bt2_index'
-RNA_index = '/mnt/g/ribo_test/index/mm_longest_transcript'
-fastq = []
-files = glob.glob(directory_path + '/*.gz')
-for i in files:
-    filename = os.path.splitext(os.path.basename(i))[0]
-    filename = re.search('SRR\d+',filename).group()
-    fastq.append(filename)
+adapt_seq = 'CTGTAGGCACCATCAAT'
 
+
+trRNA_index = './mouse_ribo_utils/mm10_trRNA'
+RNA_index = './mouse_ribo_utils/mm10_longest_transcript'
+ribo_density_script = "./script/calculate_ribosome_density.py"
+
+all_file = Path("rawdata/").glob('*fastq.gz')
+all_file_list = [i for i in all_file]
+
+SAMPLES = []
+for i in all_file_list:
+    file = re.search(r'SRR\d+',i.stem).group()
+    if file not in SAMPLES:
+        SAMPLES.append(file)
 rule all:
     input:
-        expand("clean_fastq/{sample}_clean.fastq.gz",sample=fastq),
-        expand("remove_trRNA/{sample}_trRNA.fastq.gz",sample=fastq),
-        expand("ribo_density/{sample}_ribo_density.txt",sample=fastq),
-        expand("sortedbam/{sample}.bam",sample=fastq),
-        expand("bigwig/{sample}.bigwig",sample=fastq)
+        expand("rawdata/{sample}.fastq.gz",sample=SAMPLES),
+        expand("clean_fastq/{sample}_clean.fastq.gz",sample=SAMPLES),
+        expand("remove_trRNA/{sample}_trRNA.fastq.gz",sample=SAMPLES),
+        expand("ribo_density/{sample}_ribo_density.txt",sample=SAMPLES),
+        expand("sortedbam/{sample}.bam",sample=SAMPLES),
+        expand("bigwig/{sample}.bigwig",sample=SAMPLES)
+
+rule QC:
+    input:
+        "rawdata/{sample}.fastq.gz"
+    output:
+        "clean_fastq/{sample}_clean.fastq.gz",
+    threads: 10
+    log:
+        "clean_fastq/{sample}.html"
+    shell:
+        "fastp -a {adapt_seq} -w {threads} -i {input} -o {output} --html {log}"
 
 rule remove_trRNA:
     input:
@@ -26,7 +43,7 @@ rule remove_trRNA:
     output:
         no_trRNA_fq = 'remove_trRNA/{sample}_trRNA.fastq',
         sam = temp('remove_trRNA/{sample}_trRNA.sam')
-    threads: 8
+    threads: 10
     log:
         'remove_trRNA/{sample}_trRNA.log'
     shell:
@@ -46,7 +63,7 @@ rule align_RNA:
         "remove_trRNA/{sample}_trRNA.fastq.gz"
     output:
         sam = temp('sam/{sample}.sam')
-    threads: 8
+    threads: 10
     log:
         'sam/{sample}.log'
     shell:
@@ -60,7 +77,7 @@ rule calculate_ribo_density:
         'ribo_density/{sample}_ribo_density.txt'
     threads: 1
     shell:
-        "python ./script/calculate_ribosome_density.py {input} {output}"
+        "python {ribo_density_script} {input} {output}"
 
 
 rule samtools_sort:
@@ -68,7 +85,7 @@ rule samtools_sort:
         'sam/{sample}.sam'
     output:
         'sortedbam/{sample}.bam'
-    threads: 8
+    threads: 10
     shell:
         'samtools sort -@ {threads} -o {output} {input}'
 
@@ -88,5 +105,6 @@ rule bam_to_bigwig:
         'bigwig/{sample}.bigwig'
     log:
         'bigwig/{sample}.bigwig.log'
+    threads: 10
     shell:
-        'bamCoverage -bs 1 -b {input.bam} -o {output} --normalizeUsing CPM 2>{log}'
+        'bamCoverage -p {threads} -bs 1 -b {input.bam} -o {output} --normalizeUsing CPM 2>{log}'

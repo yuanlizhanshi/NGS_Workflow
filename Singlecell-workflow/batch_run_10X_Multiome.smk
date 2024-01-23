@@ -20,21 +20,21 @@ cellranger_index = '/home/kyh/Desktop/hg38/CellrangerArc_ucsc_hg38'
 
 
 rule all:
-  input:
-    expand("libraries/{sample}.csv",sample=library_files),
-    expand('{sample}/outs/summary.csv',sample=library_files)
+	input:
+		expand("libraries/{sample}.csv",sample=library_files),
+		expand('{sample}/outs/summary.csv',sample=library_files)
 
 
 rule cellranger:
-  input:
-    'libraries/{sample}.csv'
-  threads: 70
-  output:
-    '{sample}/outs/summary.csv'
-  shell:
-    """
-    rm -rf {wildcards.sample}
-    {cellranger} count --id={wildcards.sample} --reference={cellranger_index} --libraries={input} --localcores={threads} --localmem=512
-    """
+	input:
+		'libraries/{sample}.csv'
+	threads: 70
+	output:
+		'{sample}/outs/summary.csv'
+	shell:
+		"""
+		rm -rf {wildcards.sample}
+		{cellranger} count --id={wildcards.sample} --reference={cellranger_index} --libraries={input} --localcores={threads} --localmem=512
+		"""
 
     
