@@ -118,7 +118,7 @@ rule Macs2_Peak_calling:
         output_prefix = "{sample}",
         output_dir = "./peak/{sample}/"
     shell:
-        "macs2 callpeak -t {input} -f BAMPE --nomodel --shift -75 --extsize 150 -g hs -n {params.output_prefix} -B -q 0.01 --outdir {params.output_dir}"
+        "macs2 callpeak -t {input} -f BAMPE --nomodel --shift -75 --extsize 150 -g hs -n {params.output_prefix} --keep-dup all -B -q 0.01 --outdir {params.output_dir}"
 
 rule peak_annotation:
     input:
