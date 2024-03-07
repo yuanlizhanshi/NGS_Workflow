@@ -81,7 +81,8 @@ rule bam_to_bigwig:
 	shell:
 		'bamCoverage -bs 20 -p {threads} -b {input.bam} -o {output} --normalizeUsing CPM 2>{log}'
        
-rule Macs2_Peak_calling:
+
+rule Macs3_Peak_calling:
 	input:
 		"rmdup_bam/{sample}_rmdup.bam"
 	output:
@@ -92,7 +93,7 @@ rule Macs2_Peak_calling:
 		output_prefix = "{sample}",
 		output_dir = "./peak/{sample}/"
 	shell:
-		"macs2 callpeak -t {input} --keep-dup all -f BAMPE --nomodel --shift -75 --extsize 150 -g 4.5e8 -n {params.output_prefix} -B -q 0.001 --outdir {params.output_dir}"
+		"macs3 hmmratac -i {input} -n {params.output_prefix} --outdir {params.output_dir}"
 
 rule peak_annotation:
     input:
