@@ -18,3 +18,5 @@ out_pdf_name <- paste0('./fragment_distuibution/',bamFiles.labels,'.pdf')
 pdf(out_pdf_name,width = 8,height = 6)
 fragSize <- fragSizeDist(bamFile = bam_file,bamFiles.labels =  bamFiles.labels)
 dev.off()
+##equal to
+##samtools view ATAC_f2q30_sorted.bam | awk '$9>0' | cut -f 9 | sort | uniq -c | sort -b -k2,2n | sed -e 's/^[ \t]*//' > fragment_length_count.txt
