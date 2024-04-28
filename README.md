@@ -171,7 +171,30 @@ For identification of differential peaks, [exomePeak2](https://bioconductor.org/
 
 ## Ribo sequencing workflow
 
-TBD
+The workflow is rely on the package [RiboMiner](https://github.com/xryanglab/RiboMiner/tree/master)
+
+1. Generate the longest longest transcript annotation file 
+
+>prepare_transcripts -g hg38.gtf -f hg38.fa -o hg38_ribo_utils
+
+>OutputTranscriptInfo -c hg38_ribo_utils/transcripts_cds.txt \
+-g ~/Desktop/hg38/hg38_transcript/genes.gtf \
+-f hg38_ribo_utils/transcripts_sequence.fa \
+-o ./hg38_ribo_utils/hg38_longest.transcripts.info.txt -O ./hg38_ribo_utils/hg38_all.transcripts.info.txt
+
+>GetProteinCodingSequence -i hg38_ribo_utils/transcripts_sequence.fa  \
+-c ./hg38_ribo_utils/hg38_longest.transcripts.info.txt  -o hg38_ribo_utils/hg38 --mode whole --table 1
+
+
+2. Build tRNA, rRNA index  and longest transcript index
+
+>bowtie2-build Homo_sapiens_trRNA.fa hg38_trRNA
+
+>hisat2-build hg38_transcript_sequences.fa hg38_longest_transcript
+
+
+3. The snakemake workflow will generated the basic results, for the downstream analysis you should refer the document of [RiboMiner](https://github.com/xryanglab/RiboMiner/tree/master)
+
 
 -----
 
