@@ -110,7 +110,7 @@ Before running this snakemake, there are many parameters that need to change in 
 This is a ChIP-seq workflow (from fastq.gz to peak). It was also suitable for [CUT&RUN](https://elifesciences.org/articles/46314) and [CUT&Tag](https://www.nature.com/articles/s41596-020-0373-x) experiments.
 Before the ChIP-seq workflow, the genome index of bowtie2 should be built **first**.
 
->bowtie2-build genome.fa  genome
+>bowtie2-build --threads 40 genome.fa  genome
 
 There are also many parameters need change in snakemake file. Its depends on your ChIP experiment research object (Transcription factors or Histone modification), research species (Genome size) and replication numbers. you should read the paper of [MACS2](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2008-9-9-r137) carefully.
 
